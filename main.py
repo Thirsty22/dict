@@ -1,19 +1,23 @@
-print("Hello world")
+import mysql.connector
 
 my_db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="abdulloh",
-    database="log_pass"
+    password="2160900",
+    database="lugat"
 )
+
 
 class Lugat:
     def __init__(self):
         self.uzbekcha = None
-        self.INglizcha = None
+        self.Inglizcha = None
 
     def start(self):
-        pass
+        print("Lug`atga so`z kiriting")
+        Uzbek = input("Uzbek: ")
+        English = input("English: ")
+
 
 person = Lugat()
 person.start()
