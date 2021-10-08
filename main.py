@@ -41,6 +41,7 @@ class Lugat:
             self.qoshishqismi()
         elif input_num == option[1]:
             print("Lug'at ichidagi so'zlarni ko'rish")
+            self.lugati_ichini_korish()
         elif input_num == option[2]:
             self.izlash()
         else:
@@ -64,6 +65,16 @@ class Lugat:
             english = input("English: ").strip()
 
         self.assigh_user_values(tablename, uzbek, english)
+        self.clear()
+        print(f"Qo'shilgan so'zlar: {uzbek} - {english}")
+        self.tizizga_qaytish()
+
+
+    def lugati_ichini_korish(self):
+        mycursor = my_db.cursor()
+        mycursor.execute(f"select * from {tablename};")
+        new_mycursor = mycursor.fetchall()
+        [print(list(row)) for row in new_mycursor]
 
     def izlash(self):
         self.clear()
@@ -100,8 +111,30 @@ class Lugat:
         return False
 
 
+    @staticmethod
+    def chiqsih():
+        self.clear()
+        print("Tizimdan muffaqiyatlik chiqip kettingiz! ")
+        exit()
+
+    def tizizga_qaytish(self):
+        tanlash = input("Bosh sahifaga o'tasizmi yoki dasturdan chiqip ketasizmi?\n"
+                        "[y/n]: ")
+        tanlash_option = ['yes', 'y', 'n', 'no']
+
+        while tanlash not in tanlash_option:
+            self.clear_and_invalid_text("")
+            tanlash = input("[y/n]: ")
+
+        if tanlash == tanlash_option[0] or tanlash == tanlash_option[1]:
+            self.clear()
+            self.tanlash()
+        else:
+            self.chiqsih()
 
 
 
 person = Lugat()
 person.tanlash()
+
+
